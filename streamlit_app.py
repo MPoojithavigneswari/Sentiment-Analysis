@@ -51,16 +51,21 @@ def preprocess_text(text, tokenizer, max_length):
 
 # Function to load GloVe embeddings
 def load_glove_embeddings(vocab_size, embedding_dim, tokenizer):
-    embedding_matrix = np.zeros((vocab_size, embedding_dim))
-    with open('glove.6B.100d.txt', 'r', encoding='utf-8') as f:
+    embeddings_index = {}
+    with open('glove.6B.100d.txt', encoding='utf-8') as f:
         for line in f:
             values = line.split()
             word = values[0]
             coefs = np.asarray(values[1:], dtype='float32')
-            if word in tokenizer.word_index:
-                idx = tokenizer.word_index[word]
-                if idx < vocab_size:
-                    embedding_matrix[idx] = coefs
+            embeddings_index[word] = coefs
+
+    # Creating` an embedding matrix
+    embedding_matrix = np.zeros((vocab_size, embedding_dim))
+    for word, i in tokenizer.word_index.items():
+        if i < vocab_size:
+            embedding_vector = embeddings_index.get(word)
+            if embedding_vector is not None:
+                embedding_matrix[i] = embedding_vector
     return embedding_matrix
 
 # Load GloVe embeddings
