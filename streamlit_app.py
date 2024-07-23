@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-import requests
+import gdown
 import os
 import pickle
 from tensorflow.keras.models import Model
@@ -17,14 +17,9 @@ GLOVE_URL = 'https://drive.google.com/uc?export=download&id=1Fq9zV2-o-Ej4bj3LPoC
 WEIGHTS_URL = 'https://drive.google.com/uc?export=download&id=1oooHUpHgmSRZjY4Qt-sYNTN9QgUvmxOe'
 TOKENIZER_URL = 'https://drive.google.com/uc?export=download&id=1f2CL3bxz1W8MVxF_zhlYqlAVrkod0KL7'
 
-
-# Function to download files from Google Drive
+# Function to download files using gdown
 def download_file(url, output_path):
-    response = requests.get(url, stream=True)
-    with open(output_path, 'wb') as file:
-        for chunk in response.iter_content(chunk_size=8192):
-            if chunk:
-                file.write(chunk)
+    gdown.download(url, output_path, quiet=False)
 
 # Download the files if they don't exist locally
 if not os.path.exists('glove.6B.100d.txt'):
@@ -59,7 +54,7 @@ def load_glove_embeddings(vocab_size, embedding_dim, tokenizer):
             coefs = np.asarray(values[1:], dtype='float32')
             embeddings_index[word] = coefs
 
-    # Creating` an embedding matrix
+    # Creating an embedding matrix
     embedding_matrix = np.zeros((vocab_size, embedding_dim))
     for word, i in tokenizer.word_index.items():
         if i < vocab_size:
@@ -101,4 +96,3 @@ if st.button("Predict Sentiment"):
         st.write(f"Predicted Sentiment: {sentiment}")
     else:
         st.write("Please enter a review to predict.")
-
