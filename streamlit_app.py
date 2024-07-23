@@ -13,8 +13,8 @@ EMBEDDING_DIM = 100
 VOCAB_SIZE = 910915
 
 # URLs for downloading the files
-GLOVE_URL = 'https://drive.google.com/file/d/1Fq9zV2-o-Ej4bj3LPoCH9O8rDy5gyXoV/view?usp=sharing'
-WEIGHTS_URL = 'https://drive.google.com/file/d/1oooHUpHgmSRZjY4Qt-sYNTN9QgUvmxOe/view?usp=sharing'
+GLOVE_URL = 'https://drive.google.com/uc?export=download&id=1Fq9zV2-o-Ej4bj3LPoCH9O8rDy5gyXoV'
+WEIGHTS_URL = 'https://drive.google.com/uc?export=download&id=1oooHUpHgmSRZjY4Qt-sYNTN9QgUvmxOe'
 TOKENIZER_URL = 'https://drive.google.com/uc?export=download&id=1f2CL3bxz1W8MVxF_zhlYqlAVrkod0KL7'
 
 
@@ -102,7 +102,3 @@ if st.button("Predict Sentiment"):
     else:
         st.write("Please enter a review to predict.")
 
-st.write("Download the pre-trained model weights and GloVe embeddings from the links below if needed:")
-st.write("[GloVe Embeddings](https://drive.google.com/file/d/1Fq9zV2-o-Ej4bj3LPoCH9O8rDy5gyXoV/view?usp=sharing)")
-st.write("[Model Weights](https://drive.google.com/file/d/1oooHUpHgmSRZjY4Qt-sYNTN9QgUvmxOe/view?usp=sharing)")
-st.write("[Tokenizer](https://drive.google.com/uc?export=download&id=1f2CL3bxz1W8MVxF_zhlYqlAVrkod0KL7)")
